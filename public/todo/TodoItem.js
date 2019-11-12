@@ -7,7 +7,7 @@ class TodoItem extends Component {
         const updateTodo = this.props.updateTodo;
         const removeTodo = this.props.removeTodo;
 
-        const checkbox = dom.querySelector('input[type=checkbox]');
+        const checkbox = dom.querySelector('input');
         checkbox.addEventListener('click', () => {
             todo.complete = !todo.complete;
             updateTodo(todo);
@@ -18,6 +18,7 @@ class TodoItem extends Component {
             const confirmed = confirm(`Are you sure you want to remove "${todo.task}"?`);
             if (confirmed) {
                 removeTodo(todo);
+                location.reload();
             }
         });
     }

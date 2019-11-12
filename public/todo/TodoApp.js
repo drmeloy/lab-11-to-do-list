@@ -21,14 +21,15 @@ class TodoApp extends Component {
         main.appendChild(list.renderDOM());
 
         const add = new AddTodo({ 
-            addToto: addTodo,
+            addTodo: addTodo,
         });
         main.appendChild(add.renderDOM());
 
         const loading = new Loading({ loading: true });
         dom.appendChild(loading.renderDOM());
 
-        
+        // const todoTry = getTodos();
+        // console.log(todoTry);
 
         // initial todo load:
         try {
