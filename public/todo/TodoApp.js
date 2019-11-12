@@ -35,7 +35,7 @@ class TodoApp extends Component {
             getTodos().then(todos => list.update({ todos }));
         }
         catch (err) {
-            console.log('Load todos failed\n', err);
+            error.textContent = 'Failed to load To Do\'s';
         }
         finally {
             loading.update({ loading: false });

@@ -61,7 +61,7 @@ app.post('/api/todos', async(req, res) => {
     }
 });
 
-app.put('/api/todos/:id', async (req, res) => {
+app.put('/api/todos/:id', async(req, res) => {
     const id = req.params.id;
     const todo = req.body;
 
@@ -83,7 +83,7 @@ app.put('/api/todos/:id', async (req, res) => {
     }
 });
 
-app.delete('/api/todos/:id', async (req, res) => {
+app.delete('/api/todos/:id', async(req, res) => {
     // get the id that was passed in the route:
     const id = req.params.id;
 
