@@ -3,13 +3,19 @@ import Component from '../Component.js';
 class AddTodo extends Component {
 
     onRender(form) {
-        const onAdd = this.props.onAdd;
+        const addTodo = this.props.addTodo;
+        const input = form.querySelector('input');
         
         form.addEventListener('submit', async event => {
             event.preventDefault();
+            
+            const newTodo = {
+                task: input.value,
+                complete: false
+            };
 
             try {
-                await onAdd(catType);
+                await addTodo(newTodo);
                 // this only runs if no error:
                 form.reset();
                 document.activeElement.blur();
@@ -23,8 +29,9 @@ class AddTodo extends Component {
 
     renderHTML() {
         return /*html*/`
-            <form>
-                
+            <form class="add-todo">
+                <input name="new-todo" required>
+                <button>Add</button>
             </form>
         `;
     }

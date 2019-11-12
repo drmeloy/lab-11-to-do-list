@@ -29,7 +29,7 @@ class TodoItem extends Component {
         <li class="todo-item">
             <input type="checkbox" checked="${todo.complete}">
             <span class="item ${todo.complete}">${todo.task}</span>
-            <button class="remove-button">
+            <button class="remove-button">X</button>
         </li>
         `;
     }
