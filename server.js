@@ -6,8 +6,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const client = require('./lib/client');
-const pg = require('pg');
-pg.defaults.ssl = true;
+
 // Initiate database connection
 client.connect();
 
@@ -22,11 +21,12 @@ app.use(express.json()); // enable reading incoming json data
 // API Routes
 
 // *** TODOS ***
-app.get('/api/todos', async (req, res) => {
+app.get('/api/todos', async(req, res) => {
 
     try {
         const result = await client.query(`
-            
+            SELECT *
+            FROM todos;
         `);
 
         res.json(result.rows);
@@ -40,14 +40,16 @@ app.get('/api/todos', async (req, res) => {
 
 });
 
-app.post('/api/todos', async (req, res) => {
+app.post('/api/todos', async(req, res) => {
     const todo = req.body;
 
     try {
         const result = await client.query(`
-            
+            INSERT INTO todos (task, complete)
+            VALUES ($1, $2)
+            RETURNING *;
         `,
-        [/* pass in data */]);
+        [todo.task, todo.complete]);
 
         res.json(result.rows[0]);
     }
@@ -65,8 +67,11 @@ app.put('/api/todos/:id', async (req, res) => {
 
     try {
         const result = await client.query(`
-            
-        `, [/* pass in data */]);
+            UPDATE todo
+            SET complete = $2
+            WHERE id = $1
+            RETURNING *;
+        `, [id, todo.complete]);
      
         res.json(result.rows[0]);
     }
@@ -80,12 +85,14 @@ app.put('/api/todos/:id', async (req, res) => {
 
 app.delete('/api/todos/:id', async (req, res) => {
     // get the id that was passed in the route:
-    const id = 0; // ???
+    const id = req.params.id;
 
     try {
         const result = await client.query(`
-         
-        `, [/* pass data */]);
+            DELETE FROM todos
+            WHERE id = $1
+            RETURNING *;
+        `, [id]);
         
         res.json(result.rows[0]);
     }
