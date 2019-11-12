@@ -9,8 +9,10 @@ class TodoItem extends Component {
 
         const checkbox = dom.querySelector('input');
         checkbox.addEventListener('click', () => {
+            console.log(todo);
             todo.complete = !todo.complete;
             onUpdate(todo);
+            console.log(todo);
         });
 
         const removeButton = dom.querySelector('button');
@@ -27,7 +29,7 @@ class TodoItem extends Component {
 
         return /*html*/`
         <li class="todo-item">
-            <input type="checkbox" checked="${todo.complete}">
+            <input type="checkbox" ${todo.complete ? 'checked' : ''}>
             <span class="item ${todo.complete}">${todo.task}</span>
             <button class="remove-button">X</button>
         </li>
