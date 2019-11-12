@@ -3,7 +3,7 @@ import Component from '../Component.js';
 class AddTodo extends Component {
 
     onRender(form) {
-        const addTodo = this.props.addTodo;
+        const { onAdd } = this.props;
         
         form.addEventListener('submit', async event => {
             event.preventDefault();
@@ -16,12 +16,10 @@ class AddTodo extends Component {
             };
 
             try {
-                await addTodo(newTodo);
-                console.log(newTodo);
+                await onAdd(newTodo);
                 // this only runs if no error:
                 form.reset();
                 document.activeElement.blur();
-                location.reload();
             }
             catch (err) {
                 // nothing to do as App will show error,
