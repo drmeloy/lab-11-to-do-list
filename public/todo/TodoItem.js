@@ -9,10 +9,8 @@ class TodoItem extends Component {
 
         const checkbox = dom.querySelector('input');
         checkbox.addEventListener('click', () => {
-            console.log(todo);
             todo.complete = !todo.complete;
             onUpdate(todo);
-            console.log(todo);
         });
 
         const removeButton = dom.querySelector('button');

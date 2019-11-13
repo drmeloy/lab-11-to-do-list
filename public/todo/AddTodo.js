@@ -31,6 +31,7 @@ class AddTodo extends Component {
     renderHTML() {
         return /*html*/`
             <form class="add-todo">
+                <p>Add new To-Do item:</p>
                 <input name="new-todo" required>
                 <button>Add</button>
             </form>

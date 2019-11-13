@@ -18,7 +18,9 @@ class TodoList extends Component {
     }
     renderHTML() {
         return /*html*/`
-            <ul class="todo-list"></ul>
+            <ul class="todo-list">
+                <li class="instructions">MARK DONE <( ' . ' )> TO DO ITEM <( ' . ' )> DELETE</li>
+            </ul>
         `;
     }
 }
