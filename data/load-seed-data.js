@@ -1,6 +1,7 @@
 const client = require('../lib/client');
 // import our seed data:
 const todos = require('./todos');
+const users = require('./users');
 
 run();
 
@@ -8,6 +9,16 @@ async function run() {
 
     try {
         await client.connect();
+
+        await Promise.all(
+            users.map(user => {
+                return client.query(`
+                    INSERT INTO users (email, hash, display_name)
+                    VALUES ($1, $2, $3);
+                `,
+                [user.email, user.hash, user.display_name]);
+            })
+        );
 
         await Promise.all(
             todos.map(todo => {
